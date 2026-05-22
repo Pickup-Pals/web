@@ -716,6 +716,15 @@
     document.getElementById('btn-next-1').disabled = false;
   }
 
+  // Pre-select service from ?flow= URL param (used by SEO landing pages)
+  (function() {
+    var urlFlow = new URLSearchParams(window.location.search).get('flow');
+    if (urlFlow) {
+      var el = document.querySelector('[data-flow="' + urlFlow + '"]');
+      if (el) selectService(el);
+    }
+  })();
+
   function goStep2() {
     if (!formData.flow) return;
     var stepId = formData.flow === 'junk' ? 'step-2-junk'
