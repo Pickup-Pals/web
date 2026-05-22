@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Get a Free Quote — Pickup Pals Sunshine Coast</title>
+  <meta name="description" content="Get a free quote for junk removal, furniture moves or deliveries on the Sunshine Coast. We'll call you within the hour."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --brand:#F47820;
+      --brand-dark:#D4631A;
+      --brand-light:#FFF4EC;
+      --ink:#0F0F12;
+      --ink-2:#3D3D45;
+      --ink-3:#6B6B75;
+      --bg:#FAFAF9;
+      --surface:#ffffff;
+      --border:#E8E8EC;
+      --font-display:'Outfit',system-ui,sans-serif;
+      --font-body:'Manrope',system-ui,sans-serif;
+      --radius:16px;
+      --shadow:0 4px 24px rgba(0,0,0,.08);
+      --shadow-lg:0 12px 48px rgba(0,0,0,.12);
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
+    a{color:inherit;text-decoration:none;}
+
+    /* ── Nav ── */
+    nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+    .nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:800;font-size:22px;color:var(--ink);}
+    .nav-logo-mark{width:38px;height:38px;background:var(--brand);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:900;flex-shrink:0;}
+    .nav-phone{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink-2);}
+    .nav-phone a:hover{color:var(--brand);}
+
+    /* ── Page shell ── */
+    .page{max-width:680px;margin:0 auto;padding:60px 24px 80px;}
+
+    /* ── Progress bar ── */
+    .progress-wrap{margin-bottom:40px;}
+    .progress-steps{display:flex;gap:8px;margin-bottom:10px;}
+    .progress-step{flex:1;height:4px;background:var(--border);border-radius:99px;transition:background .3s;}
+    .progress-step.done{background:var(--brand);}
+    .progress-label{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--ink-3);}
+    .progress-label span{color:var(--brand);}
+
+    /* ── Cards (service options) ── */
+    .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+    .card-option{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:8px;}
+    .card-option:hover{border-color:var(--brand);box-shadow:0 0 0 4px rgba(244,120,32,.08);}
+    .card-option.selected{border-color:var(--brand);background:var(--brand-light);box-shadow:0 0 0 4px rgba(244,120,32,.12);}
+    .card-icon{font-size:28px;line-height:1;}
+    .card-title{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--ink);}
+    .card-desc{font-size:13px;color:var(--ink-3);line-height:1.5;}
+
+    /* ── Form fields ── */
+    .field{margin-bottom:20px;}
+    .field label{display:block;font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--ink-2);margin-bottom:6px;}
+    .field input,.field textarea,.field select{width:100%;font-family:var(--font-body);font-size:15px;color:var(--ink);background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:12px 16px;transition:border-color .2s;outline:none;-webkit-appearance:none;}
+    .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand);}
+    .field textarea{resize:vertical;min-height:100px;}
+    .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B75' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;cursor:pointer;}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .field-hint{font-size:12px;color:var(--ink-3);margin-top:5px;}
+
+    /* ── Size options ── */
+    .size-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+    .size-option{background:var(--surface);border:2px solid var(--border);border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .2s;}
+    .size-option:hover{border-color:var(--brand);}
+    .size-option.selected{border-color:var(--brand);background:var(--brand-light);}
+    .size-option-label{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink);display:block;}
+    .size-option-sub{font-size:11px;color:var(--ink-3);display:block;margin-top:2px;}
+
+    /* ── Step header ── */
+    .step-header{margin-bottom:8px;}
+    .step-header h1{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,5vw,34px);color:var(--ink);line-height:1.15;}
+    .step-header p{font-size:16px;color:var(--ink-3);margin-top:8px;}
+
+    /* ── Nav buttons ── */
+    .form-nav{display:flex;gap:12px;margin-top:32px;}
+    .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:16px;padding:14px 28px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .btn-primary{background:var(--brand);color:#fff;}
+    .btn-primary:hover{background:var(--brand-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(244,120,32,.35);}
+    .btn-ghost{background:transparent;color:var(--ink-3);border:2px solid var(--border);}
+    .btn-ghost:hover{border-color:var(--ink-3);color:var(--ink);}
+    .btn-full{width:100%;justify-content:center;}
+    .btn:disabled{opacity:.45;pointer-events:none;}
+
+    /* ── Steps ── */
+    .step{display:none;}
+    .step.active{display:block;}
+
+    /* ── Confirmation ── */
+    .confirm-box{background:var(--surface);border:2px solid var(--border);border-radius:20px;padding:40px;text-align:center;}
+    .confirm-icon{width:72px;height:72px;background:var(--brand-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px;}
+    .confirm-box h2{font-family:var(--font-display);font-weight:800;font-size:28px;color:var(--ink);margin-bottom:10px;}
+    .confirm-box p{font-size:16px;color:var(--ink-3);line-height:1.6;max-width:420px;margin:0 auto;}
+    .confirm-detail{margin-top:28px;background:var(--bg);border-radius:12px;padding:20px;text-align:left;}
+    .confirm-detail-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;}
+    .confirm-detail-row:last-child{border-bottom:none;}
+    .confirm-detail-label{color:var(--ink-3);font-weight:500;}
+    .confirm-detail-value{font-weight:600;color:var(--ink);}
+    .confirm-contact{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .confirm-contact a{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:15px;padding:12px 24px;border-radius:12px;border:2px solid var(--border);color:var(--ink);transition:all .2s;}
+    .confirm-contact a:hover{border-color:var(--brand);color:var(--brand);}
+
+    /* ── Trust strip ── */
+    .trust-strip{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:40px;}
+    .trust-item{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:13px;color:var(--ink-3);}
+    .trust-dot{width:8px;height:8px;background:var(--brand);border-radius:50%;flex-shrink:0;}
+
+    /* ── Loading state ── */
+    .submitting-overlay{display:none;text-align:center;padding:60px 0;}
+    .submitting-overlay.visible{display:block;}
+    .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .submitting-overlay p{font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--ink-3);}
+
+    /* ── Error ── */
+    .form-error{background:#FEF2F2;border:1px solid #FECACA;color:#DC2626;border-radius:10px;padding:12px 16px;font-size:14px;margin-top:12px;display:none;}
+    .form-error.visible{display:block;}
+
+    @media(max-width:600px){
+      .card-grid{grid-template-columns:1fr;}
+      .field-row{grid-template-columns:1fr;}
+      .size-options{grid-template-columns:repeat(2,1fr);}
+      .form-nav{flex-direction:column-reverse;}
+      .form-nav .btn-ghost{text-align:center;justify-content:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">P</div>
+      Pickup Pals
+    </a>
+    <div class="nav-phone">
+      <a href="tel:0434411372">0434 411 372</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-steps">
+      <div class="progress-step done" id="prog-1"></div>
+      <div class="progress-step" id="prog-2"></div>
+      <div class="progress-step" id="prog-3"></div>
+      <div class="progress-step" id="prog-4"></div>
+    </div>
+    <div class="progress-label" id="progress-label">Step <span id="step-num">1</span> of 3</div>
+  </div>
+
+  <!-- Trust strip -->
+  <div class="trust-strip">
+    <div class="trust-item"><div class="trust-dot"></div>No obligation</div>
+    <div class="trust-item"><div class="trust-dot"></div>We call within the hour</div>
+    <div class="trust-item"><div class="trust-dot"></div>Upfront pricing</div>
+    <div class="trust-item"><div class="trust-dot"></div>Same-day available</div>
+  </div>
+
+  <!-- Step 1: Service type -->
+  <div class="step active" id="step-1">
+    <div class="step-header">
+      <h1>What do you need help with?</h1>
+      <p>Select the service that best fits your job.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card-option" data-value="Junk Removal" onclick="selectService(this)">
+        <div class="card-icon">🗑️</div>
+        <div class="card-title">Junk Removal</div>
+        <div class="card-desc">Old furniture, appliances, rubbish, green waste</div>
+      </div>
+      <div class="card-option" data-value="Furniture Move" onclick="selectService(this)">
+        <div class="card-icon">🛋️</div>
+        <div class="card-title">Furniture Move</div>
+        <div class="card-desc">House moves, single items, room to room</div>
+      </div>
+      <div class="card-option" data-value="Delivery" onclick="selectService(this)">
+        <div class="card-icon">📦</div>
+        <div class="card-title">Delivery</div>
+        <div class="card-desc">Marketplace pickups, store deliveries, bulky items</div>
+      </div>
+      <div class="card-option" data-value="Other" onclick="selectService(this)">
+        <div class="card-icon">💬</div>
+        <div class="card-title">Something else</div>
+        <div class="card-desc">Not sure? Tell us what you need</div>
+      </div>
+    </div>
+    <div class="form-nav" style="margin-top:32px;">
+      <button class="btn btn-primary" id="btn-next-1" onclick="goStep(2)" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Job details -->
+  <div class="step" id="step-2">
+    <div class="step-header">
+      <h1>Tell us about the job</h1>
+      <p>The more detail, the more accurate your quote.</p>
+    </div>
+
+    <div class="field">
+      <label>Describe what needs to be done</label>
+      <textarea id="job-description" placeholder="E.g. 2-seater couch, old mattress and a small TV unit — all from ground floor…" rows="4"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Roughly how much stuff?</label>
+      <div class="size-options">
+        <div class="size-option" data-value="Small" onclick="selectSize(this)">
+          <span class="size-option-label">Small</span>
+          <span class="size-option-sub">Ute load or less</span>
+        </div>
+        <div class="size-option" data-value="Medium" onclick="selectSize(this)">
+          <span class="size-option-label">Medium</span>
+          <span class="size-option-sub">1–2 rooms</span>
+        </div>
+        <div class="size-option" data-value="Large" onclick="selectSize(this)">
+          <span class="size-option-label">Large</span>
+          <span class="size-option-sub">Half house+</span>
+        </div>
+        <div class="size-option" data-value="Not sure" onclick="selectSize(this)">
+          <span class="size-option-label">Not sure</span>
+          <span class="size-option-sub">We'll assess</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Suburb</label>
+        <input type="text" id="job-suburb" placeholder="e.g. Caloundra"/>
+      </div>
+      <div class="field">
+        <label>Preferred date</label>
+        <input type="date" id="job-date" min=""/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Any access notes? <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+      <input type="text" id="job-access" placeholder="e.g. Narrow driveway, stairs, no lift…"/>
+    </div>
+
+    <div class="form-nav">
+      <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+      <button class="btn btn-primary" onclick="goStep(3)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Contact details -->
+  <div class="step" id="step-3">
+    <div class="step-header">
+      <h1>Your details</h1>
+      <p>We'll give you a call to confirm pricing and lock in a time.</p>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>First name</label>
+        <input type="text" id="contact-first" placeholder="Lisa" autocomplete="given-name"/>
+      </div>
+      <div class="field">
+        <label>Last name</label>
+        <input type="text" id="contact-last" placeholder="Hardy" autocomplete="family-name"/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Phone number</label>
+      <input type="tel" id="contact-phone" placeholder="04xx xxx xxx" autocomplete="tel"/>
+      <div class="field-hint">We'll call you on this number within the hour.</div>
+    </div>
+
+    <div class="field">
+      <label>Email address <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label>
+      <input type="email" id="contact-email" placeholder="you@email.com" autocomplete="email"/>
+      <div class="field-hint">So we can send your quote in writing.</div>
+    </div>
+
+    <div class="form-error" id="form-error">Please fill in all required fields before submitting.</div>
+
+    <div class="form-nav">
+      <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+      <button class="btn btn-primary" onclick="submitQuote()">Get my quote →</button>
+    </div>
+  </div>
+
+  <!-- Submitting overlay -->
+  <div class="submitting-overlay" id="submitting">
+    <div class="spinner"></div>
+    <p>Sending your request…</p>
+  </div>
+
+  <!-- Step 4: Confirmation -->
+  <div class="step" id="step-4">
+    <div class="confirm-box">
+      <div class="confirm-icon">🎉</div>
+      <h2>You're all set!</h2>
+      <p>Thanks <strong id="confirm-name"></strong> — we've received your request and will call you within the hour to confirm pricing and lock in a time.</p>
+
+      <div class="confirm-detail" id="confirm-summary"></div>
+
+      <div class="confirm-contact">
+        <a href="tel:0434411372">📞 Call us now</a>
+        <a href="sms:0434411372">💬 Send a text</a>
+        <a href="index.html">← Back to home</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var formData = {
+    service: '',
+    description: '',
+    size: '',
+    suburb: '',
+    date: '',
+    access: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+  };
+
+  // Set min date to today
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('job-date').min = today;
+
+  function selectService(el) {
+    document.querySelectorAll('.card-option').forEach(function(c){ c.classList.remove('selected'); });
+    el.classList.add('selected');
+    formData.service = el.dataset.value;
+    document.getElementById('btn-next-1').disabled = false;
+  }
+
+  function selectSize(el) {
+    document.querySelectorAll('.size-option').forEach(function(s){ s.classList.remove('selected'); });
+    el.classList.add('selected');
+    formData.size = el.dataset.value;
+  }
+
+  function updateProgress(step) {
+    for (var i = 1; i <= 4; i++) {
+      var el = document.getElementById('prog-' + i);
+      el.classList.toggle('done', i <= step);
+    }
+    var maxStep = 3;
+    document.getElementById('step-num').textContent = Math.min(step, maxStep);
+    document.getElementById('progress-label').innerHTML = step === 4
+      ? '<span>Quote sent!</span>'
+      : 'Step <span id="step-num">' + Math.min(step, maxStep) + '</span> of ' + maxStep;
+  }
+
+  function goStep(n) {
+    // Collect current values before navigating
+    if (n > 2) {
+      formData.description = document.getElementById('job-description').value.trim();
+      formData.suburb = document.getElementById('job-suburb').value.trim();
+      formData.date = document.getElementById('job-date').value;
+      formData.access = document.getElementById('job-access').value.trim();
+    }
+
+    document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
+    var el = document.getElementById('step-' + n);
+    if (el) el.classList.add('active');
+    updateProgress(n);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function validateStep3() {
+    formData.firstName = document.getElementById('contact-first').value.trim();
+    formData.lastName = document.getElementById('contact-last').value.trim();
+    formData.phone = document.getElementById('contact-phone').value.trim();
+    formData.email = document.getElementById('contact-email').value.trim();
+
+    if (!formData.firstName || !formData.phone) {
+      var err = document.getElementById('form-error');
+      err.textContent = 'Please enter your first name and phone number.';
+      err.classList.add('visible');
+      return false;
+    }
+    // Basic phone check — must have at least 8 digits
+    if (formData.phone.replace(/\D/g,'').length < 8) {
+      var err = document.getElementById('form-error');
+      err.textContent = 'Please enter a valid Australian phone number.';
+      err.classList.add('visible');
+      return false;
+    }
+    document.getElementById('form-error').classList.remove('visible');
+    return true;
+  }
+
+  function submitQuote() {
+    if (!validateStep3()) return;
+
+    // Show submitting state
+    document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
+    document.getElementById('submitting').classList.add('visible');
+
+    var payload = {
+      service: formData.service,
+      description: formData.description,
+      size: formData.size,
+      suburb: formData.suburb,
+      date: formData.date,
+      access: formData.access,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      email: formData.email,
+    };
+
+    fetch('https://api.pickuppals.com.au/leads/quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    .then(function(res) {
+      return res.json().then(function(data) {
+        return { ok: res.ok, status: res.status, data: data };
+      });
+    })
+    .then(function(result) {
+      document.getElementById('submitting').classList.remove('visible');
+      if (result.ok || result.status === 200) {
+        showConfirmation();
+      } else {
+        showApiError('Something went wrong — please call us on 0434 411 372.');
+      }
+    })
+    .catch(function() {
+      document.getElementById('submitting').classList.remove('visible');
+      // On network failure, still show confirmation — we don't want to block the user
+      showConfirmation(true);
+    });
+  }
+
+  function showConfirmation(networkError) {
+    var name = formData.firstName + (formData.lastName ? ' ' + formData.lastName : '');
+    document.getElementById('confirm-name').textContent = name;
+
+    var rows = [
+      { label: 'Service', value: formData.service },
+      { label: 'Size', value: formData.size || '—' },
+      { label: 'Suburb', value: formData.suburb || '—' },
+      { label: 'Preferred date', value: formData.date ? formatDate(formData.date) : 'Flexible' },
+      { label: 'Contact', value: formData.phone },
+    ];
+    var html = rows.map(function(r) {
+      return '<div class="confirm-detail-row"><span class="confirm-detail-label">' + r.label + '</span><span class="confirm-detail-value">' + escapeHtml(r.value) + '</span></div>';
+    }).join('');
+    document.getElementById('confirm-summary').innerHTML = html;
+
+    if (networkError) {
+      var note = document.createElement('p');
+      note.style.cssText = 'margin-top:12px;font-size:13px;color:var(--ink-3);text-align:center;';
+      note.textContent = "Heads up: we may not have received your request. If you don't hear from us, please call 0434 411 372.";
+      document.getElementById('confirm-summary').appendChild(note);
+    }
+
+    goStep(4);
+  }
+
+  function showApiError(msg) {
+    document.getElementById('form-error').textContent = msg;
+    document.getElementById('form-error').classList.add('visible');
+    document.getElementById('step-3').classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function formatDate(str) {
+    if (!str) return '';
+    var parts = str.split('-');
+    if (parts.length !== 3) return str;
+    var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+    return d.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+
+</body>
+</html>
