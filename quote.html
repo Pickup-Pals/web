@@ -389,8 +389,8 @@
     </div>
 
     <div class="field">
-      <label>What needs to go? <span class="field-optional">(optional)</span></label>
-      <textarea id="junk-items" rows="3" placeholder="e.g. old couch, fridge, mattress, garden rubbish…" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;resize:vertical;"></textarea>
+      <label>What needs to go?</label>
+      <textarea id="junk-items" rows="3" placeholder="e.g. old couch, fridge, mattress, garden rubbish…" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;resize:vertical;" oninput="updateJunkPrice()"></textarea>
     </div>
 
     <div class="section-divider">
@@ -774,10 +774,11 @@
     var needsAccess = formData.junkLoadSize && formData.junkLoadSize !== 'Single Item' && !formData.junkAccess;
     var nextBtn = document.getElementById('btn-next-junk');
 
+    var hasItems = (document.getElementById('junk-items').value || '').trim().length > 0;
     if (price !== null) {
       amountEl.textContent = '$' + price;
       display.classList.add('visible');
-      nextBtn.disabled = false;
+      nextBtn.disabled = !hasItems;
     } else if (formData.junkLoadSize && formData.junkTeam && needsAccess) {
       amountEl.textContent = '—';
       display.classList.add('visible');
