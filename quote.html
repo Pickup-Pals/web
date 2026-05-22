@@ -194,7 +194,7 @@
       <div class="nav-logo-mark">P</div>
       Pickup Pals
     </a>
-    <div class="nav-phone"><a href="tel:0434411372">0434 411 372</a></div>
+    <div class="nav-phone"><a href="tel:0434411372" style="display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:#fff;padding:8px 16px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;">📞 Call us</a></div>
   </div>
 </nav>
 
@@ -223,29 +223,23 @@
       <h1>What do you need help with?</h1>
       <p>Select the service and we'll get you sorted.</p>
     </div>
-    <div class="card-grid">
+    <div class="card-grid" style="grid-template-columns:1fr;">
       <div class="card-option" data-flow="junk" onclick="selectService(this)">
         <div class="card-icon">🗑️</div>
         <div class="card-title">Junk Removal</div>
-        <div class="card-desc">Old furniture, appliances, rubbish, green waste</div>
+        <div class="card-desc">Old furniture, appliances, rubbish, green waste & garage cleanouts</div>
         <div><span class="card-badge card-badge-instant">Instant price</span></div>
       </div>
       <div class="card-option" data-flow="furniture" onclick="selectService(this)">
         <div class="card-icon">🛋️</div>
-        <div class="card-title">Furniture Move</div>
-        <div class="card-desc">House moves, single items, room to room</div>
+        <div class="card-title">Furniture Moves</div>
+        <div class="card-desc">Single item pickups, marketplace & store collections, appliance delivery</div>
         <div><span class="card-badge card-badge-quote">We'll quote you</span></div>
       </div>
-      <div class="card-option" data-flow="delivery" onclick="selectService(this)">
-        <div class="card-icon">📦</div>
-        <div class="card-title">Delivery</div>
-        <div class="card-desc">Marketplace pickups, store deliveries, bulky items</div>
-        <div><span class="card-badge card-badge-quote">We'll quote you</span></div>
-      </div>
-      <div class="card-option" data-flow="other" onclick="selectService(this)">
-        <div class="card-icon">💬</div>
-        <div class="card-title">Something else</div>
-        <div class="card-desc">Not sure? Tell us what you need</div>
+      <div class="card-option" data-flow="house" onclick="selectService(this)">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">House Moves</div>
+        <div class="card-desc">Full house & unit moves, apartment & townhouse moves, office relocations</div>
         <div><span class="card-badge card-badge-quote">We'll quote you</span></div>
       </div>
     </div>
@@ -520,15 +514,20 @@
     </div>
 
     <div class="field">
+      <label>What items need to be moved?</label>
+      <textarea id="furniture-items" rows="3" placeholder="e.g. 3-seater couch, queen bed frame, dining table and 4 chairs, 10 boxes…" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;resize:vertical;" oninput="checkFurnitureNext()"></textarea>
+    </div>
+
+    <div class="field">
       <label>Anything else we should know? <span class="field-optional">(optional)</span></label>
-      <textarea id="furniture-notes" placeholder="e.g. Heavy piano, narrow hallway, specific items to move…" rows="3"></textarea>
+      <textarea id="furniture-notes" placeholder="e.g. Large fridge, narrow hallway, fragile items, disassembly needed…" rows="3"></textarea>
     </div>
 
     <div class="callout">We'll review your details and call you with a fixed price and available times — usually within the hour.</div>
 
     <div class="form-nav">
       <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
-      <button class="btn btn-primary" onclick="goStep(3)">Next →</button>
+      <button class="btn btn-primary" id="btn-next-furniture" onclick="goStep(3)" disabled>Next →</button>
     </div>
   </div>
 
@@ -690,6 +689,7 @@
     junkAvail: '', junkDateVal: '', junkDateFrom: '', junkDateTo: '', junkTimePref: '',
     // furniture
     furniturePickup: '', furnitureDropoff: '', furnitureLoadSize: '',
+    furnitureItems: '',
     furniturePickupAccess: '', furnitureDropoffAccess: '', furnitureNotes: '',
     furnitureAvail: '', furnitureDateVal: '', furnitureDateFrom: '', furnitureDateTo: '', furnitureTimePref: '',
     // other
@@ -719,13 +719,8 @@
   function goStep2() {
     if (!formData.flow) return;
     var stepId = formData.flow === 'junk' ? 'step-2-junk'
-               : formData.flow === 'furniture' ? 'step-2-furniture'
+               : (formData.flow === 'furniture' || formData.flow === 'house') ? 'step-2-furniture'
                : 'step-2-other';
-    if (formData.flow === 'delivery') {
-      document.getElementById('other-step-title').textContent = 'Tell us about the delivery';
-    } else if (formData.flow === 'other') {
-      document.getElementById('other-step-title').textContent = 'Tell us what you need';
-    }
     showStep(stepId, 2);
   }
 
@@ -795,6 +790,11 @@
       display.classList.remove('visible');
       nextBtn.disabled = true;
     }
+  }
+
+  function checkFurnitureNext() {
+    var btn = document.getElementById('btn-next-furniture');
+    if (btn) btn.disabled = !(document.getElementById('furniture-items').value || '').trim();
   }
 
   // ── Date / availability ────────────────────────────────────────────────────
@@ -897,7 +897,7 @@
     var submitBtn = document.getElementById('btn-submit');
     if (flow === 'junk' && price !== null) {
       submitBtn.textContent = 'Confirm Booking — $' + price + ' →';
-    } else if (flow === 'furniture') {
+    } else if (flow === 'furniture' || flow === 'house') {
       submitBtn.textContent = 'Request a Quote →';
       document.getElementById('step3-sub').textContent = 'We\'ll call you with a fixed price — usually within the hour.';
     } else {
@@ -967,12 +967,13 @@
       formData.junkDateFrom = jd.dateFrom || '';
       formData.junkDateTo = jd.dateTo || '';
       formData.junkTimePref = jd.timePref || '';
-    } else if (formData.flow === 'furniture') {
+    } else if (formData.flow === 'furniture' || formData.flow === 'house') {
       formData.furniturePickup = document.getElementById('furniture-pickup').value.trim();
       formData.furnitureDropoff = document.getElementById('furniture-dropoff').value.trim();
       formData.furnitureLoadSize = document.getElementById('furniture-load-size').value;
       formData.furniturePickupAccess = document.getElementById('furniture-pickup-access').value;
       formData.furnitureDropoffAccess = document.getElementById('furniture-dropoff-access').value;
+      formData.furnitureItems = document.getElementById('furniture-items').value.trim();
       formData.furnitureNotes = document.getElementById('furniture-notes').value.trim();
       var fd = collectDateFields('furniture');
       formData.furnitureAvail = fd.availability;
@@ -1018,10 +1019,11 @@
       payload.dateFrom = formData.junkDateFrom || undefined;
       payload.dateTo = formData.junkDateTo || undefined;
       payload.timePref = formData.junkTimePref || undefined;
-    } else if (formData.flow === 'furniture') {
+    } else if (formData.flow === 'furniture' || formData.flow === 'house') {
       payload.pickupAddress = formData.furniturePickup || undefined;
       payload.dropoffAddress = formData.furnitureDropoff || undefined;
       payload.furnitureLoadSize = formData.furnitureLoadSize || undefined;
+      payload.furnitureItems = formData.furnitureItems || undefined;
       payload.pickupAccess = formData.furniturePickupAccess || undefined;
       payload.dropoffAccess = formData.furnitureDropoffAccess || undefined;
       payload.notes = formData.furnitureNotes || undefined;
@@ -1078,7 +1080,7 @@
 
     // Summary rows
     var rows = [];
-    var serviceLabel = { junk: 'Junk Removal', furniture: 'Furniture Move', delivery: 'Delivery', other: 'Enquiry' }[formData.flow] || formData.flow;
+    var serviceLabel = { junk: 'Junk Removal', furniture: 'Furniture Moves', house: 'House Move', other: 'Enquiry' }[formData.flow] || formData.flow;
     rows.push({ label: 'Service', value: serviceLabel });
 
     if (formData.flow === 'junk') {
@@ -1088,9 +1090,10 @@
       if (p) rows.push({ label: 'Fixed price', value: '$' + p + ' + tip fees' });
       if (formData.junkAddress) rows.push({ label: 'Address', value: formData.junkAddress });
       rows.push({ label: 'When', value: fmtAvail(formData.junkAvail, formData.junkDateVal, formData.junkDateFrom, formData.junkDateTo, formData.junkTimePref) });
-    } else if (formData.flow === 'furniture') {
+    } else if (formData.flow === 'furniture' || formData.flow === 'house') {
       if (formData.furniturePickup) rows.push({ label: 'Pickup', value: formData.furniturePickup });
       if (formData.furnitureDropoff) rows.push({ label: 'Drop-off', value: formData.furnitureDropoff });
+      if (formData.furnitureItems) rows.push({ label: 'Items', value: formData.furnitureItems });
       rows.push({ label: 'When', value: fmtAvail(formData.furnitureAvail, formData.furnitureDateVal, formData.furnitureDateFrom, formData.furnitureDateTo, formData.furnitureTimePref) });
     } else {
       if (formData.otherSuburb) rows.push({ label: 'Suburb', value: formData.otherSuburb });
