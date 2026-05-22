@@ -385,6 +385,15 @@
     </div>
 
     <div class="section-divider">
+      <div class="section-divider-label">Items</div>
+    </div>
+
+    <div class="field">
+      <label>What needs to go? <span class="field-optional">(optional)</span></label>
+      <textarea id="junk-items" rows="3" placeholder="e.g. old couch, fridge, mattress, garden rubbish…" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;resize:vertical;"></textarea>
+    </div>
+
+    <div class="section-divider">
       <div class="section-divider-label">Photos</div>
     </div>
 
@@ -945,6 +954,7 @@
     // Collect remaining fields
     if (formData.flow === 'junk') {
       formData.junkAddress = document.getElementById('junk-address').value.trim();
+      formData.junkItems = document.getElementById('junk-items').value.trim();
       var jd = collectDateFields('junk');
       formData.junkAvail = jd.availability;
       formData.junkDateVal = jd.date || '';
@@ -995,6 +1005,7 @@
       payload.teamSize = formData.junkTeam;
       payload.junkPrice = junkPrice;
       payload.pickupAddress = formData.junkAddress || undefined;
+      payload.junkItems = formData.junkItems || undefined;
       payload.photoUrls = photoUrls.length ? photoUrls : undefined;
       payload.availability = formData.junkAvail || 'asap';
       payload.date = formData.junkDateVal || undefined;
@@ -1066,6 +1077,7 @@
 
     if (formData.flow === 'junk') {
       if (formData.junkLoadSize) rows.push({ label: 'Load', value: formData.junkLoadSize });
+      if (formData.junkItems) rows.push({ label: 'Items', value: formData.junkItems });
       var p = calcJunkPrice();
       if (p) rows.push({ label: 'Fixed price', value: '$' + p + ' + tip fees' });
       if (formData.junkAddress) rows.push({ label: 'Address', value: formData.junkAddress });
