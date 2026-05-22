@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BLK3Y2467N"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-BLK3Y2467N");</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BLK3Y2467N"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-BLK3Y2467N");gtag("config","AW-16974315749");</script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Get a Quote — Pickup Pals Sunshine Coast</title>
@@ -1060,11 +1060,32 @@
     .then(function(res) { return res.json().then(function(d){ return { ok: res.ok, data: d }; }); })
     .then(function(result) {
       document.getElementById('submitting').classList.remove('visible');
+      fireAdsConversion();
       showConfirmation(false);
     })
     .catch(function() {
       document.getElementById('submitting').classList.remove('visible');
+      fireAdsConversion();
       showConfirmation(true);
+    });
+  }
+
+  function fireAdsConversion() {
+    if (typeof gtag !== 'function') return;
+    var value = formData.flow === 'junk' ? (calcJunkPrice() || 150)
+              : formData.flow === 'furniture' ? 300
+              : formData.flow === 'house' ? 600
+              : 150;
+    // Enhanced conversions — send customer data for better attribution
+    gtag('set', 'user_data', {
+      email: formData.email || '',
+      phone_number: formData.phone ? '+61' + formData.phone.replace(/\D/g,'').replace(/^0/,'') : '',
+      address: { first_name: formData.firstName || '', last_name: formData.lastName || '' }
+    });
+    gtag('event', 'conversion', {
+      send_to: 'AW-16974315749/vY4JCKi_vbMaEOWB_p0_',
+      value: value,
+      currency: 'AUD'
     });
   }
 
