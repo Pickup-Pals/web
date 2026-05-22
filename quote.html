@@ -94,7 +94,11 @@
     .price-display.visible{display:block;}
     .price-display-label{font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
     .price-display-amount{font-family:var(--font-display);font-weight:900;font-size:38px;color:var(--brand);line-height:1;}
-    .price-display-note{font-size:12px;color:var(--ink-3);margin-top:6px;}
+    .price-display-tip{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--brand-dark);margin-top:4px;}
+    .price-display-note{font-size:12px;color:var(--ink-3);margin-top:4px;}
+
+    /* 3-col toggle */
+    .toggle-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px;}
 
     /* Fields */
     .field{margin-bottom:18px;}
@@ -164,6 +168,7 @@
       .card-grid{grid-template-columns:1fr;}
       .field-row{grid-template-columns:1fr;}
       .toggle-row{grid-template-columns:1fr;}
+      .toggle-row-3{grid-template-columns:1fr;}
       .form-nav{flex-direction:column-reverse;}
       .form-nav .btn-ghost{text-align:center;justify-content:center;}
       .load-card-price{font-size:16px;}
@@ -306,21 +311,62 @@
     <div class="price-display" id="junk-price-display">
       <div class="price-display-label">Your price</div>
       <div class="price-display-amount" id="junk-price-amount">$—</div>
-      <div class="price-display-note">Fixed price — no hidden fees. Tip fees charged at cost on the day.</div>
+      <div class="price-display-tip">+ tip/dump fees charged at cost on the day</div>
+      <div class="price-display-note">Labour is fixed. We'll let you know the tip fees before we go to the tip.</div>
     </div>
 
     <div class="section-divider">
       <div class="section-divider-label">When & where</div>
     </div>
 
-    <div class="field-row">
-      <div class="field">
-        <label>Suburb</label>
-        <input type="text" id="junk-suburb" placeholder="e.g. Caloundra"/>
+    <div class="field">
+      <label>Suburb</label>
+      <input type="text" id="junk-suburb" placeholder="e.g. Caloundra"/>
+    </div>
+
+    <div class="field">
+      <label>When do you need it?</label>
+      <div class="toggle-row-3">
+        <div class="toggle-opt" data-avail="asap" onclick="selectAvail(this,'junk')">
+          <div class="toggle-opt-title">ASAP</div>
+          <div class="toggle-opt-sub">As soon as possible</div>
+        </div>
+        <div class="toggle-opt" data-avail="specific" onclick="selectAvail(this,'junk')">
+          <div class="toggle-opt-title">Specific date</div>
+          <div class="toggle-opt-sub">I have a date in mind</div>
+        </div>
+        <div class="toggle-opt" data-avail="flexible" onclick="selectAvail(this,'junk')">
+          <div class="toggle-opt-title">Flexible</div>
+          <div class="toggle-opt-sub">Date range works</div>
+        </div>
       </div>
-      <div class="field">
-        <label>Preferred date <span class="field-optional">(optional)</span></label>
-        <input type="date" id="junk-date" min=""/>
+    </div>
+    <div id="junk-date-specific" style="display:none;">
+      <div class="field-row">
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="junk-date-val" min=""/>
+        </div>
+        <div class="field">
+          <label>Time preference</label>
+          <select id="junk-time-pref">
+            <option value="Either">Either works</option>
+            <option value="Morning (7am–12pm)">Morning (7am–12pm)</option>
+            <option value="Afternoon (12pm–5pm)">Afternoon (12pm–5pm)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div id="junk-date-flexible" style="display:none;">
+      <div class="field-row">
+        <div class="field">
+          <label>Earliest date</label>
+          <input type="date" id="junk-date-from" min=""/>
+        </div>
+        <div class="field">
+          <label>Latest date</label>
+          <input type="date" id="junk-date-to" min=""/>
+        </div>
       </div>
     </div>
 
@@ -353,21 +399,61 @@
       </div>
     </div>
 
-    <div class="field-row">
-      <div class="field">
-        <label>Load size</label>
-        <select id="furniture-load-size">
-          <option value="">Select size…</option>
-          <option>Single Item</option>
-          <option>Half Ute Load</option>
-          <option>Full Ute Load</option>
-          <option>Half Truck Load</option>
-          <option>Full Truck Load</option>
-        </select>
+    <div class="field">
+      <label>Load size</label>
+      <select id="furniture-load-size">
+        <option value="">Select size…</option>
+        <option>Single Item</option>
+        <option>Half Ute Load</option>
+        <option>Full Ute Load</option>
+        <option>Half Truck Load</option>
+        <option>Full Truck Load</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>When do you need it?</label>
+      <div class="toggle-row-3">
+        <div class="toggle-opt" data-avail="asap" onclick="selectAvail(this,'furniture')">
+          <div class="toggle-opt-title">ASAP</div>
+          <div class="toggle-opt-sub">As soon as possible</div>
+        </div>
+        <div class="toggle-opt" data-avail="specific" onclick="selectAvail(this,'furniture')">
+          <div class="toggle-opt-title">Specific date</div>
+          <div class="toggle-opt-sub">I have a date in mind</div>
+        </div>
+        <div class="toggle-opt" data-avail="flexible" onclick="selectAvail(this,'furniture')">
+          <div class="toggle-opt-title">Flexible</div>
+          <div class="toggle-opt-sub">Date range works</div>
+        </div>
       </div>
-      <div class="field">
-        <label>Preferred date <span class="field-optional">(optional)</span></label>
-        <input type="date" id="furniture-date" min=""/>
+    </div>
+    <div id="furniture-date-specific" style="display:none;">
+      <div class="field-row">
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="furniture-date-val" min=""/>
+        </div>
+        <div class="field">
+          <label>Time preference</label>
+          <select id="furniture-time-pref">
+            <option value="Either">Either works</option>
+            <option value="Morning (7am–12pm)">Morning (7am–12pm)</option>
+            <option value="Afternoon (12pm–5pm)">Afternoon (12pm–5pm)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div id="furniture-date-flexible" style="display:none;">
+      <div class="field-row">
+        <div class="field">
+          <label>Earliest date</label>
+          <input type="date" id="furniture-date-from" min=""/>
+        </div>
+        <div class="field">
+          <label>Latest date</label>
+          <input type="date" id="furniture-date-to" min=""/>
+        </div>
       </div>
     </div>
 
@@ -417,14 +503,54 @@
       <textarea id="other-description" placeholder="E.g. Need a fridge picked up from Harvey Norman Maroochydore and delivered to Caloundra…" rows="4"></textarea>
     </div>
 
-    <div class="field-row">
-      <div class="field">
-        <label>Suburb</label>
-        <input type="text" id="other-suburb" placeholder="e.g. Maroochydore"/>
+    <div class="field">
+      <label>Suburb</label>
+      <input type="text" id="other-suburb" placeholder="e.g. Maroochydore"/>
+    </div>
+
+    <div class="field">
+      <label>When do you need it?</label>
+      <div class="toggle-row-3">
+        <div class="toggle-opt" data-avail="asap" onclick="selectAvail(this,'other')">
+          <div class="toggle-opt-title">ASAP</div>
+          <div class="toggle-opt-sub">As soon as possible</div>
+        </div>
+        <div class="toggle-opt" data-avail="specific" onclick="selectAvail(this,'other')">
+          <div class="toggle-opt-title">Specific date</div>
+          <div class="toggle-opt-sub">I have a date in mind</div>
+        </div>
+        <div class="toggle-opt" data-avail="flexible" onclick="selectAvail(this,'other')">
+          <div class="toggle-opt-title">Flexible</div>
+          <div class="toggle-opt-sub">Date range works</div>
+        </div>
       </div>
-      <div class="field">
-        <label>Preferred date <span class="field-optional">(optional)</span></label>
-        <input type="date" id="other-date" min=""/>
+    </div>
+    <div id="other-date-specific" style="display:none;">
+      <div class="field-row">
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="other-date-val" min=""/>
+        </div>
+        <div class="field">
+          <label>Time preference</label>
+          <select id="other-time-pref">
+            <option value="Either">Either works</option>
+            <option value="Morning (7am–12pm)">Morning (7am–12pm)</option>
+            <option value="Afternoon (12pm–5pm)">Afternoon (12pm–5pm)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div id="other-date-flexible" style="display:none;">
+      <div class="field-row">
+        <div class="field">
+          <label>Earliest date</label>
+          <input type="date" id="other-date-from" min=""/>
+        </div>
+        <div class="field">
+          <label>Latest date</label>
+          <input type="date" id="other-date-to" min=""/>
+        </div>
       </div>
     </div>
 
@@ -468,7 +594,7 @@
     <div class="price-display visible" id="step3-price-summary" style="display:none!important;">
       <div class="price-display-label">Your fixed price</div>
       <div class="price-display-amount" id="step3-price-amount"></div>
-      <div class="price-display-note">Tip fees charged at cost on the day.</div>
+      <div class="price-display-tip">+ tip/dump fees charged at cost on the day</div>
     </div>
 
     <div class="form-error" id="form-error"></div>
@@ -514,19 +640,24 @@
   var formData = {
     flow: '',
     // junk
-    junkLoadSize: '', junkAccess: '', junkTeam: '', junkSuburb: '', junkDate: '',
+    junkLoadSize: '', junkAccess: '', junkTeam: '', junkSuburb: '',
+    junkAvail: '', junkDateVal: '', junkDateFrom: '', junkDateTo: '', junkTimePref: '',
     // furniture
-    furniturePickup: '', furnitureDropoff: '', furnitureLoadSize: '', furnitureDateVal: '',
+    furniturePickup: '', furnitureDropoff: '', furnitureLoadSize: '',
     furniturePickupAccess: '', furnitureDropoffAccess: '', furnitureNotes: '',
+    furnitureAvail: '', furnitureDateVal: '', furnitureDateFrom: '', furnitureDateTo: '', furnitureTimePref: '',
     // other
-    otherDesc: '', otherSuburb: '', otherDate: '',
+    otherDesc: '', otherSuburb: '',
+    otherAvail: '', otherDateVal: '', otherDateFrom: '', otherDateTo: '', otherTimePref: '',
     // contact
     firstName: '', lastName: '', phone: '', email: '',
   };
 
-  // Set min dates
+  // Set min dates on all date inputs
   var today = new Date().toISOString().split('T')[0];
-  ['junk-date','furniture-date','other-date'].forEach(function(id) {
+  ['junk-date-val','junk-date-from','junk-date-to',
+   'furniture-date-val','furniture-date-from','furniture-date-to',
+   'other-date-val','other-date-from','other-date-to'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.min = today;
   });
@@ -617,6 +748,37 @@
       display.classList.remove('visible');
       nextBtn.disabled = true;
     }
+  }
+
+  // ── Date / availability ────────────────────────────────────────────────────
+  function selectAvail(el, flow) {
+    var container = el.closest('.field');
+    container.querySelectorAll('.toggle-opt').forEach(function(o){ o.classList.remove('selected'); });
+    el.classList.add('selected');
+    var avail = el.dataset.avail;
+    formData[flow + 'Avail'] = avail;
+    document.getElementById(flow + '-date-specific').style.display = avail === 'specific' ? 'block' : 'none';
+    document.getElementById(flow + '-date-flexible').style.display = avail === 'flexible' ? 'block' : 'none';
+  }
+
+  function collectDateFields(flow) {
+    var avail = formData[flow + 'Avail'];
+    var result = { availability: avail || 'asap' };
+    if (avail === 'specific') {
+      result.date = document.getElementById(flow + '-date-val').value || '';
+      result.timePref = document.getElementById(flow + '-time-pref').value || 'Either';
+    } else if (avail === 'flexible') {
+      result.dateFrom = document.getElementById(flow + '-date-from').value || '';
+      result.dateTo = document.getElementById(flow + '-date-to').value || '';
+    }
+    return result;
+  }
+
+  function fmtAvail(avail, date, dateFrom, dateTo, timePref) {
+    if (avail === 'asap') return 'ASAP';
+    if (avail === 'specific') return (date ? formatDate(date) : '—') + (timePref && timePref !== 'Either' ? ' · ' + timePref : '');
+    if (avail === 'flexible') return (dateFrom ? formatDate(dateFrom) : '—') + ' – ' + (dateTo ? formatDate(dateTo) : '—');
+    return '—';
   }
 
   // ── Address autocomplete ───────────────────────────────────────────────────
@@ -740,19 +902,34 @@
     // Collect remaining fields
     if (formData.flow === 'junk') {
       formData.junkSuburb = document.getElementById('junk-suburb').value.trim();
-      formData.junkDate = document.getElementById('junk-date').value;
+      var jd = collectDateFields('junk');
+      formData.junkAvail = jd.availability;
+      formData.junkDateVal = jd.date || '';
+      formData.junkDateFrom = jd.dateFrom || '';
+      formData.junkDateTo = jd.dateTo || '';
+      formData.junkTimePref = jd.timePref || '';
     } else if (formData.flow === 'furniture') {
       formData.furniturePickup = document.getElementById('furniture-pickup').value.trim();
       formData.furnitureDropoff = document.getElementById('furniture-dropoff').value.trim();
       formData.furnitureLoadSize = document.getElementById('furniture-load-size').value;
-      formData.furnitureDateVal = document.getElementById('furniture-date').value;
       formData.furniturePickupAccess = document.getElementById('furniture-pickup-access').value;
       formData.furnitureDropoffAccess = document.getElementById('furniture-dropoff-access').value;
       formData.furnitureNotes = document.getElementById('furniture-notes').value.trim();
+      var fd = collectDateFields('furniture');
+      formData.furnitureAvail = fd.availability;
+      formData.furnitureDateVal = fd.date || '';
+      formData.furnitureDateFrom = fd.dateFrom || '';
+      formData.furnitureDateTo = fd.dateTo || '';
+      formData.furnitureTimePref = fd.timePref || '';
     } else {
       formData.otherDesc = document.getElementById('other-description').value.trim();
       formData.otherSuburb = document.getElementById('other-suburb').value.trim();
-      formData.otherDate = document.getElementById('other-date').value;
+      var od = collectDateFields('other');
+      formData.otherAvail = od.availability;
+      formData.otherDateVal = od.date || '';
+      formData.otherDateFrom = od.dateFrom || '';
+      formData.otherDateTo = od.dateTo || '';
+      formData.otherTimePref = od.timePref || '';
     }
 
     // Show spinner
@@ -775,19 +952,31 @@
       payload.teamSize = formData.junkTeam;
       payload.junkPrice = junkPrice;
       payload.suburb = formData.junkSuburb || undefined;
-      payload.date = formData.junkDate || undefined;
+      payload.availability = formData.junkAvail || 'asap';
+      payload.date = formData.junkDateVal || undefined;
+      payload.dateFrom = formData.junkDateFrom || undefined;
+      payload.dateTo = formData.junkDateTo || undefined;
+      payload.timePref = formData.junkTimePref || undefined;
     } else if (formData.flow === 'furniture') {
       payload.pickupAddress = formData.furniturePickup || undefined;
       payload.dropoffAddress = formData.furnitureDropoff || undefined;
       payload.furnitureLoadSize = formData.furnitureLoadSize || undefined;
-      payload.date = formData.furnitureDateVal || undefined;
       payload.pickupAccess = formData.furniturePickupAccess || undefined;
       payload.dropoffAccess = formData.furnitureDropoffAccess || undefined;
       payload.notes = formData.furnitureNotes || undefined;
+      payload.availability = formData.furnitureAvail || 'asap';
+      payload.date = formData.furnitureDateVal || undefined;
+      payload.dateFrom = formData.furnitureDateFrom || undefined;
+      payload.dateTo = formData.furnitureDateTo || undefined;
+      payload.timePref = formData.furnitureTimePref || undefined;
     } else {
       payload.notes = formData.otherDesc || undefined;
       payload.suburb = formData.otherSuburb || undefined;
-      payload.date = formData.otherDate || undefined;
+      payload.availability = formData.otherAvail || 'asap';
+      payload.date = formData.otherDateVal || undefined;
+      payload.dateFrom = formData.otherDateFrom || undefined;
+      payload.dateTo = formData.otherDateTo || undefined;
+      payload.timePref = formData.otherTimePref || undefined;
     }
 
     fetch(API + '/leads/quote', {
@@ -834,16 +1023,16 @@
     if (formData.flow === 'junk') {
       if (formData.junkLoadSize) rows.push({ label: 'Load', value: formData.junkLoadSize });
       var p = calcJunkPrice();
-      if (p) rows.push({ label: 'Fixed price', value: '$' + p });
+      if (p) rows.push({ label: 'Fixed price', value: '$' + p + ' + tip fees' });
       if (formData.junkSuburb) rows.push({ label: 'Suburb', value: formData.junkSuburb });
-      if (formData.junkDate) rows.push({ label: 'Date', value: formatDate(formData.junkDate) });
+      rows.push({ label: 'When', value: fmtAvail(formData.junkAvail, formData.junkDateVal, formData.junkDateFrom, formData.junkDateTo, formData.junkTimePref) });
     } else if (formData.flow === 'furniture') {
       if (formData.furniturePickup) rows.push({ label: 'Pickup', value: formData.furniturePickup });
       if (formData.furnitureDropoff) rows.push({ label: 'Drop-off', value: formData.furnitureDropoff });
-      if (formData.furnitureDateVal) rows.push({ label: 'Date', value: formatDate(formData.furnitureDateVal) });
+      rows.push({ label: 'When', value: fmtAvail(formData.furnitureAvail, formData.furnitureDateVal, formData.furnitureDateFrom, formData.furnitureDateTo, formData.furnitureTimePref) });
     } else {
       if (formData.otherSuburb) rows.push({ label: 'Suburb', value: formData.otherSuburb });
-      if (formData.otherDate) rows.push({ label: 'Date', value: formatDate(formData.otherDate) });
+      rows.push({ label: 'When', value: fmtAvail(formData.otherAvail, formData.otherDateVal, formData.otherDateFrom, formData.otherDateTo, formData.otherTimePref) });
     }
     rows.push({ label: 'Contact', value: formData.phone });
 
