@@ -698,6 +698,8 @@
     otherAvail: '', otherDateVal: '', otherDateFrom: '', otherDateTo: '', otherTimePref: '',
     // contact
     firstName: '', lastName: '', phone: '', email: '',
+    // attribution
+    gclid: '',
   };
 
   // Set min dates on all date inputs
@@ -718,12 +720,17 @@
   }
 
   // Pre-select service from ?flow= URL param (used by SEO landing pages)
+  // Also capture gclid/gbraid/wbraid from Google Ads clicks and persist in sessionStorage
   (function() {
-    var urlFlow = new URLSearchParams(window.location.search).get('flow');
+    var params = new URLSearchParams(window.location.search);
+    var urlFlow = params.get('flow');
     if (urlFlow) {
       var el = document.querySelector('[data-flow="' + urlFlow + '"]');
       if (el) selectService(el);
     }
+    var gclid = params.get('gclid') || params.get('gbraid') || params.get('wbraid') || '';
+    if (gclid) sessionStorage.setItem('pp_gclid', gclid);
+    formData.gclid = sessionStorage.getItem('pp_gclid') || '';
   })();
 
   function goStep2() {
@@ -1051,6 +1058,8 @@
       payload.dateTo = formData.otherDateTo || undefined;
       payload.timePref = formData.otherTimePref || undefined;
     }
+
+    if (formData.gclid) payload.gclid = formData.gclid;
 
     fetch(API + '/leads/quote', {
       method: 'POST',
