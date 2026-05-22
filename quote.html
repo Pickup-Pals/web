@@ -658,6 +658,11 @@
       <div class="confirm-icon" id="confirm-icon">🎉</div>
       <h2 id="confirm-heading">You're all set!</h2>
       <p id="confirm-body">Thanks <strong id="confirm-name"></strong> — we've received your request and will be in touch shortly.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:#FFF4EA;border:1.5px solid #F47820;border-radius:10px;padding:10px 16px;margin:12px 0 4px;font-size:13px;color:#92400E;">
+        <span style="font-size:16px;">🕐</span>
+        <span><strong>Booking team hours:</strong> Mon – Fri, 8:00am – 4:30pm</span>
+      </div>
+      <p style="font-size:13px;color:var(--ink-3);margin:8px 0 16px;">We'll also send a summary to your email and phone.</p>
       <div class="confirm-detail" id="confirm-summary"></div>
       <div class="confirm-contact">
         <a href="tel:0434411372">📞 Call us now</a>
@@ -1059,13 +1064,13 @@
     var heading, body;
     if (formData.flow === 'junk') {
       heading = 'Booking request sent!';
-      body = 'Thanks <strong>' + esc(name) + '</strong> — we\'ve received your booking request and will call you within the hour to confirm the time.';
+      body = 'Thanks <strong>' + esc(name) + '</strong> — we\'ve received your booking request and will call you during business hours to confirm the time.';
     } else if (formData.flow === 'furniture') {
       heading = 'Quote request sent!';
-      body = 'Thanks <strong>' + esc(name) + '</strong> — we\'ll review your details and call you within the hour with pricing and availability.';
+      body = 'Thanks <strong>' + esc(name) + '</strong> — we\'ll review your details and call you during business hours with pricing and availability.';
     } else {
       heading = 'Enquiry sent!';
-      body = 'Thanks <strong>' + esc(name) + '</strong> — we\'ve received your enquiry and will be in touch shortly.';
+      body = 'Thanks <strong>' + esc(name) + '</strong> — we\'ve received your enquiry and will be in touch during business hours.';
     }
 
     document.getElementById('confirm-heading').textContent = heading;
