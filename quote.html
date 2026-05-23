@@ -1147,7 +1147,7 @@
     }).join('');
 
     if (networkError) {
-      html += '<p style="margin-top:12px;font-size:12px;color:var(--ink-3);text-align:center;">If you don\'t hear from us, please call <a href="tel:0434411372" style="color:var(--brand)" onclick="gtag('event','phone_call_click',{'event_category':'engagement'});">0434 411 372</a>.</p>';
+      html += '<p style="margin-top:12px;font-size:12px;color:var(--ink-3);text-align:center;">If you don\'t hear from us, please call <a href="tel:0434411372" style="color:var(--brand)" onclick="gtag(\'event\',\'phone_call_click\',{\'event_category\':\'engagement\'});">📞 Call Now</a>.</p>';
     }
 
     document.getElementById('confirm-summary').innerHTML = html;
