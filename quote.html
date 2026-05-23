@@ -718,6 +718,7 @@
     el.classList.add('selected');
     formData.flow = el.dataset.flow;
     document.getElementById('btn-next-1').disabled = false;
+    goStep2();
   }
 
   // Pre-select service from ?flow= URL param (used by SEO landing pages)
