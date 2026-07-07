@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BLK3Y2467N"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-BLK3Y2467N");gtag("config","AW-16974315749");</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=GT-PLVQ22LH"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","GT-PLVQ22LH");gtag("config","G-Q7L1Q3WYLW");gtag("config","AW-16974315749");</script>
   <meta charset="UTF-8"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
@@ -187,6 +187,7 @@
       .load-card-price{font-size:16px;}
     }
   </style>
+<script src="/pixel.js"></script>
 </head>
 <body>
 
@@ -701,6 +702,7 @@
     firstName: '', lastName: '', phone: '', email: '',
     // attribution
     gclid: '',
+    fbclid: '',
   };
 
   // Set min dates on all date inputs
@@ -733,6 +735,9 @@
     var gclid = params.get('gclid') || params.get('gbraid') || params.get('wbraid') || '';
     if (gclid) sessionStorage.setItem('pp_gclid', gclid);
     formData.gclid = sessionStorage.getItem('pp_gclid') || '';
+    var fbclid = params.get('fbclid') || '';
+    if (fbclid) sessionStorage.setItem('pp_fbclid', fbclid);
+    formData.fbclid = sessionStorage.getItem('pp_fbclid') || '';
   })();
 
   function goStep2() {
@@ -1062,6 +1067,7 @@
     }
 
     if (formData.gclid) payload.gclid = formData.gclid;
+    if (formData.fbclid) payload.fbclid = formData.fbclid;
 
     fetch(API + '/leads/quote', {
       method: 'POST',

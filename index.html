@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BLK3Y2467N"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-BLK3Y2467N");gtag("config","AW-16974315749");</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=GT-PLVQ22LH"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","GT-PLVQ22LH");gtag("config","G-Q7L1Q3WYLW");gtag("config","AW-16974315749");</script>
   <meta charset="UTF-8"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
@@ -52,6 +52,15 @@
     .nav-links{display:flex;align-items:center;gap:32px;}
     .nav-links a{font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--ink-2);transition:color .15s;}
     .nav-links a:hover{color:var(--brand);}
+    /* -- Nav dropdowns -- */
+    .nav-dropdown{position:relative;align-self:stretch;display:flex;align-items:center;}
+    .nav-dropdown>.nav-dd-toggle::after{content:'\25BE';font-size:11px;margin-left:5px;opacity:.55;}
+    .nav-dd-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:236px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);padding:8px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;translate:0 6px;transition:opacity .16s,translate .16s,visibility .16s;z-index:200;}
+    .nav-dropdown:hover .nav-dd-menu,.nav-dropdown:focus-within .nav-dd-menu{opacity:1;visibility:visible;translate:0 0;}
+    .nav-dd-menu a{font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--ink-2);padding:9px 12px;border-radius:8px;white-space:nowrap;}
+    .nav-dd-menu a:hover{background:var(--brand-light);color:var(--brand);}
+    .mm-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:10px 0 2px;}
+    .mobile-menu a.mm-sub{font-size:16px;padding:9px 0 9px 14px;}
     .nav-cta{display:flex;align-items:center;gap:12px;}
     .nav-phone{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink-2);}
     .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
@@ -125,6 +134,12 @@
     .service-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
     .service-list li{font-size:14px;color:var(--ink-2);display:flex;align-items:center;gap:8px;}
     .service-list li::before{content:'✓';color:var(--brand);font-weight:700;flex-shrink:0;}
+    .service-more{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--brand);}
+    .service-more::after{content:'\2192';transition:margin .15s;}
+    .service-more:hover::after{margin-left:4px;}
+    .service-sublinks{margin-top:10px;font-size:13px;color:var(--ink-3);}
+    .service-sublinks a{color:var(--ink-3);text-decoration:underline;text-underline-offset:2px;}
+    .service-sublinks a:hover{color:var(--brand);}
     @media(max-width:900px){.services-grid{grid-template-columns:1fr;}}
     @media(max-width:600px){.service-card{padding:28px 24px;}}
 
@@ -220,6 +235,7 @@
     .footer-copy{font-size:13px;color:rgba(255,255,255,.3);}
     @media(max-width:768px){.footer-top{grid-template-columns:1fr;gap:32px;}}
   </style>
+<script src="/pixel.js"></script>
 </head>
 <body>
 
@@ -231,9 +247,26 @@
       Pickup Pals
     </a>
     <div class="nav-links">
-      <a href="#services">Services</a>
+      <div class="nav-dropdown">
+        <a class="nav-dd-toggle" href="#services">Services</a>
+        <div class="nav-dd-menu">
+        <a href="/junk-removal-sunshine-coast">Junk Removal</a>
+        <a href="/furniture-removalists-sunshine-coast">Furniture Removal</a>
+        <a href="/house-moves-sunshine-coast">House Moves</a>
+        <a href="/green-waste-removal-sunshine-coast">Green Waste Removal</a>
+        <a href="/garage-cleanouts-sunshine-coast">Garage Cleanouts</a>
+        </div>
+      </div>
       <a href="#how-it-works">How it works</a>
-      <a href="#areas">Areas</a>
+      <div class="nav-dropdown">
+        <a class="nav-dd-toggle" href="#areas">Areas</a>
+        <div class="nav-dd-menu">
+        <a href="/junk-removal-sunshine-coast">Sunshine Coast</a>
+        <a href="/junk-removal-caloundra">Caloundra</a>
+        <a href="/junk-removal-noosa">Noosa</a>
+        <a href="/junk-removal-maroochydore">Maroochydore</a>
+        </div>
+      </div>
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta">
@@ -246,9 +279,18 @@
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#services" onclick="toggleMenu()">Services</a>
+  <div class="mm-label">Services</div>
+  <a class="mm-sub" href="/junk-removal-sunshine-coast" onclick="toggleMenu()">Junk Removal</a>
+  <a class="mm-sub" href="/furniture-removalists-sunshine-coast" onclick="toggleMenu()">Furniture Removal</a>
+  <a class="mm-sub" href="/house-moves-sunshine-coast" onclick="toggleMenu()">House Moves</a>
+  <a class="mm-sub" href="/green-waste-removal-sunshine-coast" onclick="toggleMenu()">Green Waste Removal</a>
+  <a class="mm-sub" href="/garage-cleanouts-sunshine-coast" onclick="toggleMenu()">Garage Cleanouts</a>
+  <div class="mm-label">Areas</div>
+  <a class="mm-sub" href="/junk-removal-sunshine-coast" onclick="toggleMenu()">Sunshine Coast</a>
+  <a class="mm-sub" href="/junk-removal-caloundra" onclick="toggleMenu()">Caloundra</a>
+  <a class="mm-sub" href="/junk-removal-noosa" onclick="toggleMenu()">Noosa</a>
+  <a class="mm-sub" href="/junk-removal-maroochydore" onclick="toggleMenu()">Maroochydore</a>
   <a href="#how-it-works" onclick="toggleMenu()">How it works</a>
-  <a href="#areas" onclick="toggleMenu()">Areas we service</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="tel:0434411372" style="color:var(--brand);" onclick="gtag('event','phone_call_click',{'event_category':'engagement'});">📞 Call Now</a>
   <a href="/quote.html" class="btn btn-primary" style="justify-content:center;margin-top:8px;">Get a Free Quote</a>
@@ -330,6 +372,8 @@
           <li>Office & commercial clearances</li>
           <li>Deceased estate cleanouts</li>
         </ul>
+        <a class="service-more" href="/junk-removal-sunshine-coast">See junk removal</a>
+        <div class="service-sublinks"><a href="/green-waste-removal-sunshine-coast">Green waste removal</a> · <a href="/garage-cleanouts-sunshine-coast">Garage cleanouts</a></div>
       </div>
       <div class="service-card">
         <div class="service-card-img">
@@ -345,6 +389,7 @@
           <li>Appliance delivery & placement</li>
           <li>Stair & tight-space access</li>
         </ul>
+        <a class="service-more" href="/furniture-removalists-sunshine-coast">See furniture moves</a>
       </div>
       <div class="service-card">
         <div class="service-card-img">
@@ -360,6 +405,7 @@
           <li>Stair & tight-space access</li>
           <li>Same-day available</li>
         </ul>
+        <a class="service-more" href="/house-moves-sunshine-coast">See house moves</a>
       </div>
     </div>
   </div>
@@ -615,9 +661,11 @@
       <div>
         <div class="footer-col-title">Services</div>
         <ul class="footer-links">
-          <li><a href="#services">Junk Removal</a></li>
-          <li><a href="#services">Furniture Moves</a></li>
-          <li><a href="#services">House Moves</a></li>
+          <li><a href="/junk-removal-sunshine-coast">Junk Removal</a></li>
+          <li><a href="/furniture-removalists-sunshine-coast">Furniture Removal</a></li>
+          <li><a href="/house-moves-sunshine-coast">House Moves</a></li>
+          <li><a href="/green-waste-removal-sunshine-coast">Green Waste Removal</a></li>
+          <li><a href="/garage-cleanouts-sunshine-coast">Garage Cleanouts</a></li>
         </ul>
       </div>
       <div>
@@ -627,6 +675,8 @@
           <li><a href="#areas">Areas we service</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="/quote.html">Get a quote</a></li>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms &amp; Conditions</a></li>
         </ul>
       </div>
     </div>
